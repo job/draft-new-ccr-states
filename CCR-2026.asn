@@ -1,0 +1,71 @@
+<CODE BEGINS>
+
+RpkiCanonicalCacheRepresentation-2026
+  { iso(1) member-body(2) us(840) rsadsi(113549)
+    pkcs(1) pkcs9(9) smime(16) mod(0) id-mod-rpkiCCR-2026(TBD1) }
+
+DEFINITIONS EXPLICIT TAGS ::=
+BEGIN
+
+IMPORTS
+  CONTENT-TYPE, ContentSet, Digest, DigestAlgorithmIdentifier
+  FROM CryptographicMessageSyntax-2010 -- in [RFC6268]
+    { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
+      pkcs-9(9) smime(16) modules(0) id-mod-cms-2009(58) }
+
+  Certificate
+  FROM PKIX1Explicit-2009
+    { iso(1) identified-organization(3) dod(6) internet(1)
+      security(5) mechanisms(5) pkix(7) id-mod(0)
+      id-mod-pkix1-explicit-02(51) }
+
+  ManifestState, ROAPayloadState, ASPAPayloadState,
+    TrustAnchorState, RouterKeyState
+  FROM RpkiCanonicalCacheRepresentation-2025
+  { iso(1) member-body(2) us(840) rsadsi(113549)
+    pkcs(1) pkcs9(9) smime(16) mod(0) id-mod-rpkiCCR-2025(TBD1) }
+  ;
+
+ContentInfo ::= SEQUENCE {
+  contentType      CONTENT-TYPE.&id({ContentSet}),
+  content      [0] EXPLICIT
+                   CONTENT-TYPE.&Type({ContentSet}{@contentType}) }
+
+ContentSet CONTENT-TYPE ::= {
+  CryptographicMessageSyntax-2010.ContentSet |
+  ct-rpkiCanonicalCacheRepresentation, ... }
+
+ct-rpkiCanonicalCacheRepresentation CONTENT-TYPE ::=
+  { TYPE RpkiCanonicalCacheRepresentation
+    IDENTIFIED BY id-ct-rpkiCanonicalCacheRepresentation }
+
+id-ct-rpkiCanonicalCacheRepresentation OBJECT IDENTIFIER ::=
+  { iso(1) member-body(2) us(840) rsadsi(113549) pkcs(1)
+    pkcs-9(9) id-smime(16) id-ct(1) ccr(54) }
+
+RpkiCanonicalCacheRepresentation ::= SEQUENCE {
+  version     [0] INTEGER DEFAULT 0,
+  hashAlg         DigestAlgorithmIdentifier,
+  producedAt      GeneralizedTime,
+  mfts        [1] ManifestState OPTIONAL,
+  vrps        [2] ROAPayloadState OPTIONAL,
+  vaps        [3] ASPAPayloadState OPTIONAL,
+  tas         [4] TrustAnchorState OPTIONAL,
+  rks         [5] RouterKeyState OPTIONAL,
+  tss         [6] TrustStoreState OPTIONAL,
+  ... }
+  -- at least one of the optional states MUST be present
+  ( WITH COMPONENTS { ..., mfts PRESENT } |
+    WITH COMPONENTS { ..., vrps PRESENT } |
+    WITH COMPONENTS { ..., vaps PRESENT } |
+    WITH COMPONENTS { ..., tas PRESENT } |
+    WITH COMPONENTS { ..., rks PRESENT } )
+    WITH COMPONENTS { ..., tss PRESENT } )
+
+TrustStoreState ::= SEQUENCE {
+  tacerts           SEQUENCE OF Certificate,
+  hash              Digest }
+
+END
+
+<CODE ENDS>
