@@ -231,7 +231,7 @@ Note to the RFC Editor: Please replace [this_document] with the RFC number to be
             <tr><td>7</td><td>ManifestROAMappedState</td><td>This document</td></tr>
             <tr><td>8</td><td>ManifestASPAMappedState</td><td>This document</td></tr>
             <tr><td>9</td><td>ManifestBGPSecMappedState</td><td>This document</td></tr>
-            <tr><td>30</td><td>Reserved for Private Use (local extensions)</td><td>This document</td></tr>
+            <tr><td>30</td><td>Reserved for Experimental Use</td><td>This document</td></tr>
             <tr><td>31</td><td>Reserved for CCR format maintenance</td><td>This document</td></tr>
           </tbody>
         </table>
@@ -239,12 +239,17 @@ Note to the RFC Editor: Please replace [this_document] with the RFC number to be
         <section anchor="expertreview">
           <name>Expert Review Procedure</name>
           <t>
+            RPKI CCR State Tag registry requests are registered after a three-week review period on the <tt>rpki-ccr-tag-reg-review@ietf.org</tt> mailing list, and on the advice of one or more designated experts (<xref target="RFC8126" section="5"/>).
+          </t>
+          <t>
             The designated expert is instructed to perform the "Expert Review", as described by the following checklist:
           </t>
           <ol>
             <li>The combination of Tag and Name for which the registration is requested must not be already present in the "CCR State Tags" registry.</li>
-            <li>Whether a specification exists.</li>
-            <li>TBD ...</li>
+            <li>A permanent and readily available reference specification exists with sufficient detail so that interoperability between independent implementations is possible.</li>
+            <li>The proposed registration must not duplicate existing functionality.</li>
+            <li>The CCR extension must not cause problems with existing deployed systems.</li>
+            <li>The CCR extension must not conflict with one under active development by the IETF, and having both would harm rather than foster interoperability.</li>
           </ol>
         </section>
       </section>
@@ -291,6 +296,7 @@ Note to the RFC Editor: Please replace [this_document] with the RFC number to be
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6487.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6480.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6488.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8126.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.9286.xml"/>
 
