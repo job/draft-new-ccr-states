@@ -203,6 +203,52 @@ Note to the RFC Editor: Please replace [this_document] with the RFC number to be
 
     <section anchor="iana">
       <name>IANA Considerations</name>
+
+      <section>
+        <name>RPKI CCR State Tag Registry</name>
+        <t>
+          IANA is requested to create a new registry named "CCR State Tags" under the "Resource Public Key Infrastructure (RPKI)" registry group.
+          The Registration Procedure is "Expert Review" (<xref target="RFC2434"/>).
+          The Review procedure described in <xref target="expertreview"/>.
+          The initial values are as follows:
+        </t>
+        <table anchor="ccr-state-tags" align="center">
+          <name>Initial CCR State Tags Registry</name>
+          <thead>
+            <tr>
+              <th rowspan="1" colspan="1">Tag</th>
+              <th rowspan="1" colspan="1">Name</th>
+              <th rowspan="1" colspan="1">Reference</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>ManifestState</td><td>draft-ietf-sidrops-rpki-ccr-11</td></tr>
+            <tr><td>2</td><td>ROAPayloadState</td><td>draft-ietf-sidrops-rpki-ccr-11</td></tr>
+            <tr><td>3</td><td>ASPAPayloadState</td><td>draft-ietf-sidrops-rpki-ccr-11</td></tr>
+            <tr><td>4</td><td>TrustAnchorState</td><td>draft-ietf-sidrops-rpki-ccr-11</td></tr>
+            <tr><td>5</td><td>RouterKeyState</td><td>draft-ietf-sidrops-rpki-ccr-11</td></tr>
+            <tr><td>6</td><td>TrustStoreState</td><td>This document</td></tr>
+            <tr><td>7</td><td>ManifestROAMappedState</td><td>This document</td></tr>
+            <tr><td>8</td><td>ManifestASPAMappedState</td><td>This document</td></tr>
+            <tr><td>9</td><td>ManifestBGPSecMappedState</td><td>This document</td></tr>
+            <tr><td>30</td><td>Reserved for Private Use (local extensions)</td><td>This document</td></tr>
+            <tr><td>31</td><td>Reserved for CCR format maintenance</td><td>This document</td></tr>
+          </tbody>
+        </table>
+
+        <section anchor="expertreview">
+          <name>Expert Review Procedure</name>
+          <t>
+            The designated expert is instructed to perform the "Expert Review", as described by the following checklist:
+          </t>
+          <ol>
+            <li>The combination of Tag and Name for which the registration is requested must not be already present in the "CCR State Tags" registry.</li>
+            <li>Whether a specification exists.</li>
+            <li>TBD ...</li>
+          </ol>
+        </section>
+      </section>
+
       <section>
         <name>SMI Security for S/MIME Module Identifier (1.2.840.113549.1.9.16.0)</name>
         <t>
@@ -240,6 +286,7 @@ Note to the RFC Editor: Please replace [this_document] with the RFC number to be
         <name>Normative References</name>
 
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2434.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5652.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6487.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6480.xml"/>
