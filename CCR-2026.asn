@@ -20,7 +20,8 @@ IMPORTS
       id-mod-pkix1-explicit-02(51) }
 
   ManifestState, ROAPayloadState, ASPAPayloadState,
-    TrustAnchorState, RouterKeyState
+    TrustAnchorState, RouterKeyState, ROAPayloadSet,
+    ASPAPayloadSet, RouterKeySet
   FROM RpkiCanonicalCacheRepresentation-2025
   { iso(1) member-body(2) us(840) rsadsi(113549)
     pkcs(1) pkcs9(9) smime(16) mod(0) id-mod-rpkiCCR-2025(TBD1) }
@@ -54,6 +55,7 @@ RpkiCanonicalCacheRepresentation ::= SEQUENCE {
   rks         [5] RouterKeyState OPTIONAL,
   tss         [6] TrustStoreState OPTIONAL,
   cdrs        [7] CommunityDefinitionReferenceState OPTIONAL,
+  mms         [8] ManifestMappedState OPTIONAL,
   ... }
   -- at least one of the optional states MUST be present
   ( WITH COMPONENTS { ..., mfts PRESENT } |
@@ -62,7 +64,8 @@ RpkiCanonicalCacheRepresentation ::= SEQUENCE {
     WITH COMPONENTS { ..., tas PRESENT } |
     WITH COMPONENTS { ..., rks PRESENT } |
     WITH COMPONENTS { ..., tss PRESENT } |
-    WITH COMPONENTS { ..., cdrs PRESENT } )
+    WITH COMPONENTS { ..., cdrs PRESENT } |
+    WITH COMPONENTS { ..., mms PRESENT } )
 
 TrustStoreState ::= SEQUENCE {
   tacerts           SEQUENCE (SIZE(1..MAX)) OF Certificate,
@@ -79,6 +82,19 @@ CommunityDefinitionRef ::= SEQUENCE {
 CommunityDefinitionLoc ::= SEQUENCE {
   yangRevision      IA5String (SIZE(10)),
   location          AccessDescription }
+
+ManifestMappedState ::= SEQUENCE {
+  mftmaps           SEQUENCE (SIZE(1..MAX)) OF ManifestMap,
+  hash              Digest }
+
+ManifestMap ::= SEQUENCE {
+  hash              Digest,
+  nextUpdate        GeneralizedTime,
+  rps           [1] SEQUENCE OF ROAPayloadSet,
+  vaps          [2] SEQUENCE OF ASPAPayloadSet,
+  rks           [3] SEQUENCE OF RouterKeySet,
+  cdrefs        [4] SEQUENCE OF CommunityDefinitionRef,
+  ... }
 
 END
 

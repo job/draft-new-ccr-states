@@ -229,9 +229,7 @@ Note to the RFC Editor: Please replace [this_document] with the RFC number to be
             <tr><td>5</td><td>RouterKeyState</td><td>draft-ietf-sidrops-rpki-ccr-11</td></tr>
             <tr><td>6</td><td>TrustStoreState</td><td>This document</td></tr>
             <tr><td>7</td><td>CommunityDefinitionReferenceState</td><td>This document</td></tr>
-            <tr><td>8</td><td>ManifestROAMappedState</td><td>This document</td></tr>
-            <tr><td>9</td><td>ManifestASPAMappedState</td><td>This document</td></tr>
-            <tr><td>10</td><td>ManifestBGPSecMappedState</td><td>This document</td></tr>
+            <tr><td>8</td><td>ManifestMappedState</td><td>This document</td></tr>
             <tr><td>29</td><td>Reserved for Experimental Use</td><td>This document</td></tr>
             <tr><td>30</td><td>Reserved for CCR format maintenance</td><td>This document</td></tr>
           </tbody>
