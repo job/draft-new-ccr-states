@@ -53,18 +53,32 @@ RpkiCanonicalCacheRepresentation ::= SEQUENCE {
   tas         [4] TrustAnchorState OPTIONAL,
   rks         [5] RouterKeyState OPTIONAL,
   tss         [6] TrustStoreState OPTIONAL,
+  cdrs        [7] CommunityDefinitionReferenceState OPTIONAL,
   ... }
   -- at least one of the optional states MUST be present
   ( WITH COMPONENTS { ..., mfts PRESENT } |
     WITH COMPONENTS { ..., vrps PRESENT } |
     WITH COMPONENTS { ..., vaps PRESENT } |
     WITH COMPONENTS { ..., tas PRESENT } |
-    WITH COMPONENTS { ..., rks PRESENT } )
-    WITH COMPONENTS { ..., tss PRESENT } )
+    WITH COMPONENTS { ..., rks PRESENT } |
+    WITH COMPONENTS { ..., tss PRESENT } |
+    WITH COMPONENTS { ..., cdrs PRESENT } )
 
 TrustStoreState ::= SEQUENCE {
-  tacerts           SEQUENCE OF Certificate,
+  tacerts           SEQUENCE (SIZE(1..MAX)) OF Certificate,
   hash              Digest }
+
+CommunityDefinitionReferenceState ::= SEQUENCE {
+  cdrefs            SEQUENCE (SIZE(1..MAX)) OF CommunityDefinitionRef,
+  hash              Digest }
+
+CommunityDefinitionRef ::= SEQUENCE {
+  asID              INTEGER (1..4294967295),
+  cdlocs            SEQUENCE (SIZE(1..MAX)) OF CommunityDefinitionLoc }
+
+CommunityDefinitionLoc ::= SEQUENCE {
+  yangRevision      IA5String (SIZE(10)),
+  location          AccessDescription }
 
 END
 
